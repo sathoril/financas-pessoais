@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/FinancasPessoais.API.props" />
+</Project>

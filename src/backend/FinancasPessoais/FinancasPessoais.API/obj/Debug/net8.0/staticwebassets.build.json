@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "M4t5OGSus8ntu5UMZGafP6Z6iBJYKbLbeiqdfT7VhQY=",
+  "Source": "FinancasPessoais.API",
+  "BasePath": "_content/FinancasPessoais.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
