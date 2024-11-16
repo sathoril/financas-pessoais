@@ -10,6 +10,12 @@ public class ResumoDiarioController : ControllerBase
     {
     }
 
+    [HttpPost("adicionar")]
+    public IActionResult AdicionarGasto([FromBody] AdicionarGastoRequest request)
+    {
+        return Ok();
+    }
+    
     [HttpGet("cabecalho")]
     public IActionResult ObterCabecalho()
     {
@@ -74,4 +80,10 @@ public class CabecalhoResumoDiarioResponse
 {
     public int AvailableValue { get; set; }
     public int TotalSpent { get; set; }
+}
+
+public class AdicionarGastoRequest 
+{
+    public int ValorRecebido { get; set; }
+    public int ValorGasto { get; set; }
 }

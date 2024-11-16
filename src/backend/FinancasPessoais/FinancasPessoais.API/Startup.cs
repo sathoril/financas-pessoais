@@ -37,7 +37,10 @@ public class Startup
         app.UseAuthorization();
         app.UseCors(options =>
         {
-            options.AllowAnyOrigin();
+            options
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
         });
         app.UseEndpoints(endpoints =>
         {

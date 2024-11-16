@@ -20,8 +20,8 @@ const style = {
 
 export default function BotaoAdicaoDeGasto({ onAddSuccess }: { onAddSuccess: () => void }) {
     const [openModal, setOpenModal] = useState(false);
-    const [entrada, setEntrada] = useState('');
-    const [saida, setSaida] = useState('');
+    const [entrada, setEntrada] = useState(0);
+    const [saida, setSaida] = useState(0);
     const [error, setError] = useState('');
 
     const handleOpenModal = () => setOpenModal(true);
@@ -30,15 +30,12 @@ export default function BotaoAdicaoDeGasto({ onAddSuccess }: { onAddSuccess: () 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
-        let entradaInput = Number(entrada);
-        let saidaInput = Number(saida);
-
-        if (entradaInput <= 0 && saidaInput <= 0) {
+        if (entrada <= 0 && saida <= 0) {
             setError("Pelo menos um campo precisa ter valor maior que zero.");
             return;
         }
 
-        if (entradaInput < 0 || saidaInput < 0) {
+        if (entrada < 0 || saida < 0) {
             setError("Valores não podem ser negativos.");
             return;
         }
@@ -46,10 +43,10 @@ export default function BotaoAdicaoDeGasto({ onAddSuccess }: { onAddSuccess: () 
         setError('');
 
         try {
-            const response = await fetch('/api/adicionar-gasto', {
+            const response = await fetch('https://localhost:7214/api/resumodiario/adicionar', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ entrada: entradaInput, saida: saidaInput }),
+                body: JSON.stringify({ valorRecebido: entrada * 100, valorGasto: saida * 100 }),
             });
 
             if (response.ok) {
@@ -91,7 +88,10 @@ export default function BotaoAdicaoDeGasto({ onAddSuccess }: { onAddSuccess: () 
                             sx={{ marginBottom: 2 }}
                             customInput={TextField}
                             error={!!error}
-                            onChange={(e) => setEntrada(e.target.value)}
+                            onValueChange={(values, sourceInfo) => {
+                                if (values.floatValue)
+                                    setEntrada(values.floatValue);
+                            }}
                             variant='outlined'
                             fixedDecimalScale
                         />
@@ -107,7 +107,10 @@ export default function BotaoAdicaoDeGasto({ onAddSuccess }: { onAddSuccess: () 
                             sx={{ marginBottom: 2 }}
                             customInput={TextField}
                             error={!!error}
-                            onChange={(e) => setSaida(e.target.value)}
+                            onValueChange={(values, sourceInfo) => {
+                                if (values.floatValue)
+                                    setSaida(values.floatValue);
+                            }}
                             variant='outlined'
                             fixedDecimalScale
                         />

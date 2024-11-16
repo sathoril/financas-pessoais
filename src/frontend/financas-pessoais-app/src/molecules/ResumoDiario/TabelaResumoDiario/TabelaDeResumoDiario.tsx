@@ -18,7 +18,6 @@ export default function TabelaDeResumoDiario() {
             setError(false);
             try {
                 const response = await fetch('https://localhost:7214/api/resumodiario');
-                console.log(response);
                 if (response.ok) {
                     const data = await response.json();
                     setRows(TabelaResumoDiarioResponse.fromApiResponse(data));
