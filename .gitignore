@@ -51,3 +51,10 @@ fabric.properties
 
 # *.iml
 # modules.xml
+
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
